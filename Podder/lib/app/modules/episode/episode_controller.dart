@@ -9,7 +9,7 @@ import '../../data/repository/rss_feed_repository.dart';
 class EpisodeController extends GetxController {
   final RssFeedRepository rssFeedRepository;
   EpisodeController({@required this.rssFeedRepository});
-  Future<RssFeed> getRssFeed() async => rssFeedRepository.getRssFeed();
+  // Future<RssFeed> getRssFeed() async => rssFeedRepository.getRssFeed();
 
   RssFeed rssFeed;
   String failure;
@@ -18,7 +18,7 @@ class EpisodeController extends GetxController {
   @override
   Future<void> onInit() async {
     try {
-      rssFeed = await getRssFeed();
+      rssFeed = await rssFeedRepository.getRssFeed();
       appState.value = AppState.loaded;
     } on Failure catch (f) {
       failure = f.toString();

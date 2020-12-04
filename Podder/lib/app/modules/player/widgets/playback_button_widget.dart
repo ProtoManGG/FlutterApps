@@ -1,52 +1,65 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sound_lite/flutter_sound.dart';
-import 'package:provider/provider.dart';
 
-import '../../../data/models/rss_feed_model.dart';
+class PlaybackButtonBar extends StatefulWidget {
+  final String guid;
 
-class PlaybackButton extends StatefulWidget {
+  const PlaybackButtonBar({@required this.guid}) : assert(guid != null);
   @override
   _PlaybackButtonState createState() => _PlaybackButtonState();
 }
 
-class _PlaybackButtonState extends State<PlaybackButton> {
+class _PlaybackButtonState extends State<PlaybackButtonBar> {
   bool _isPlaying = false;
-  FlutterSound _sound;
+  final FlutterSoundPlayer _player = FlutterSoundPlayer();
   double _playPosition;
-  // Stream _playerSubscription;
+
+  Stream _playerSubscription;
 
   @override
   void initState() {
-    _sound = FlutterSound();
-    _playPosition = 0;
     super.initState();
+    _player.openAudioSession().then((value) {
+      setState(() {
+        // flutterSoundPlayer = true;
+      });
+    });
+    _playPosition = 0;
   }
 
   Future<void> _stop() async {
-    await _sound.thePlayer.stopPlayer();
+    await _player.stopPlayer();
     setState(() => _isPlaying = false);
   }
 
   Future<void> _play(String url) async {
-    await _sound.thePlayer.startPlayer(fromURI: url);
-    // _playerSubscription = _sound.thePlayer.onProgress
-    //   ..listen(
-    //     (e) {
-    //       setState(
-    //         () => _playPosition = e.position.inSeconds / e.duration.inSeconds,
-    //       );
-    //     },
-    //   );
-    setState(
-      () => _isPlaying = true,
-    );
+    try {
+      // _player = await FlutterSound().thePlayer.openAudioSession();
+      print(_player.isOpen());
+      await _player.startPlayer(fromURI: url);
+      print(_player.isOpen());
+      _playerSubscription = _player.onProgress
+        ..listen(
+          (e) {
+            setState(
+              () => _playPosition = e.position.inSeconds / e.duration.inSeconds,
+            );
+            print(e);
+          },
+        );
+      setState(
+        () => _isPlaying = true,
+      );
+    } catch (e) {
+      print(e);
+    }
   }
 
   Future<void> _forward() async {
     if (_isPlaying) {
       setState(
         () async {
-          await _sound.thePlayer.seekToPlayer(const Duration(seconds: -50));
+          await _player.seekToPlayer(const Duration(seconds: -50));
         },
       );
     }
@@ -56,7 +69,7 @@ class _PlaybackButtonState extends State<PlaybackButton> {
     if (_isPlaying) {
       setState(
         () async {
-          await _sound.thePlayer.seekToPlayer(const Duration(seconds: 50));
+          await _player.seekToPlayer(const Duration(seconds: 50));
         },
       );
     }
@@ -64,7 +77,6 @@ class _PlaybackButtonState extends State<PlaybackButton> {
 
   @override
   Widget build(BuildContext context) {
-    final item = Provider.of<Podcast>(context).selectedItem;
     return Column(
       children: <Widget>[
         Slider(
@@ -86,7 +98,7 @@ class _PlaybackButtonState extends State<PlaybackButton> {
                 if (_isPlaying) {
                   _stop();
                 } else {
-                  _play(item.guid);
+                  _play(widget.guid);
                 }
               },
             ),

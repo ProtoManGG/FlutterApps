@@ -21,9 +21,7 @@ class EpisodeView extends GetView<EpisodeController> {
             } else if (controller.appState.value == AppState.failure) {
               return Text(controller.failure);
             } else {
-              return EpisodeListView(
-                rssFeed: controller.rssFeed,
-              );
+              return EpisodeListView(rssFeed: controller.rssFeed);
             }
           },
         ),

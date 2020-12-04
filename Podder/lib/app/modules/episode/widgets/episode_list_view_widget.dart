@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 import 'package:webfeed/domain/rss_feed.dart';
 
 import '../../../../routes/app_pages.dart';
-import '../../../data/models/rss_feed_model.dart';
 
 class EpisodeListView extends StatelessWidget {
   const EpisodeListView({
@@ -15,23 +13,27 @@ class EpisodeListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: rssFeed.items
-          .map(
-            (i) => ListTile(
-              title: Text(i.title),
-              subtitle: Text(
-                i.description,
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
+    return WillPopScope(
+      onWillPop:  () async => true,
+          child: ListView(
+        children: rssFeed.items
+            .map(
+              (i) => ListTile(
+                title: Text(i.title),
+                subtitle: Text(
+                  i.description,
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                onTap: () {
+                  Get.toNamed(Routes.player, arguments: i);
+                },
               ),
-              onTap: () {
-                Provider.of<Podcast>(context).selectedItem = i;
-                Get.toNamed(Routes.player);
-              },
-            ),
-          )
-          .toList(),
+            )
+            .toList()
+            .reversed
+            .toList(),
+      ),
     );
   }
 }

@@ -1,29 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:webfeed/domain/rss_feed.dart';
+import 'package:webfeed/domain/rss_item.dart';
 
-import '../../../data/models/rss_feed_model.dart';
 import 'playback_button_widget.dart';
 
 class Player extends StatelessWidget {
+  final RssFeed rssFeed;
+  final RssItem rssItem;
+
+  const Player({
+    @required this.rssFeed,
+    @required this.rssItem,
+  })  : assert(rssFeed != null),
+        assert(rssItem != null);
   @override
   Widget build(BuildContext context) {
-    final podcast = Provider.of<Podcast>(context);
-
     return Column(
       children: <Widget>[
         Flexible(
           flex: 5,
-          child: Image.network(podcast.feed.image.url),
+          child: Image.network(rssFeed.image.url),
         ),
         Flexible(
           flex: 5,
           child: SingleChildScrollView(
-            child: Text(podcast.selectedItem.description),
+            child: Text(rssItem.description),
           ),
         ),
         Flexible(
           flex: 2,
-          child: PlaybackButton(),
+          child: PlaybackButtonBar(guid: rssItem.guid),
         ),
       ],
     );
