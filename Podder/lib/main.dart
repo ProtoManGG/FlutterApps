@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'app/routes/app_pages.dart';
+import 'app/service/dio_service.dart';
+import 'routes/app_pages.dart';
 
-void main() {
+
+Future<void> main() async {
+  await initServices();
   runApp(
     GetMaterialApp(
       title: "Podder",
