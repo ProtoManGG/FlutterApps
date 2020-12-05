@@ -1,9 +1,13 @@
+import 'dart:isolate';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:podcaster/app/constants/enums.dart';
-import 'package:podcaster/app/modules/home/home_controller.dart';
-import 'package:podcaster/app/routes/app_pages.dart';
-import 'package:podcaster/app/widgets/state_widgets.dart';
+import '../../constants/enums.dart';
+import 'home_controller.dart';
+import '../../routes/app_pages.dart';
+import '../../widgets/state_widgets.dart';
+import '../../../main.dart';
 import 'package:webfeed/domain/rss_feed.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -18,7 +22,10 @@ class HomeView extends GetView<HomeController> {
             } else if (controller.appState.value == AppState.failure) {
               return buildFailureWidget(controller.failure);
             } else {
-              return EpisodeListView(rssFeed: controller.rssFeed);
+              return EpisodeListView(
+                rssFeed: controller.rssFeed,
+                controller: controller,
+              );
             }
           },
         ),
@@ -30,9 +37,11 @@ class HomeView extends GetView<HomeController> {
 class EpisodeListView extends StatelessWidget {
   const EpisodeListView({
     @required this.rssFeed,
+    @required this.controller,
   });
 
   final RssFeed rssFeed;
+  final HomeController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +64,7 @@ class EpisodeListView extends StatelessWidget {
             )
             .toList(),
       ),
+      // child: controller.listView,
     );
   }
 }

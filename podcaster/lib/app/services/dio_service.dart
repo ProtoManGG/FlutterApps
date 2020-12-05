@@ -6,5 +6,5 @@ Future<void> initServices() async {
 }
 
 class DioService extends GetxService {
-  Future<Dio> init() async => Dio(BaseOptions(connectTimeout: 1000));
+  Future<Dio> init() async => Dio(BaseOptions(connectTimeout: 10000));
 }

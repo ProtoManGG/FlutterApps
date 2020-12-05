@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:podcaster/app/constants/api_constants.dart';
+import '../../constants/api_constants.dart';
 import 'package:webfeed/webfeed.dart';
 
 import '../models/failure_model.dart';
