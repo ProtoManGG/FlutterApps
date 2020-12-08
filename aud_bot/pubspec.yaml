@@ -1,4 +1,4 @@
-name: audio_bot
+name: aud_bot
 description: A new Flutter project.
 
 publish_to: "none"
@@ -11,7 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.1
+
+  cupertino_icons: ^1.0.0
   audioplayers: ^0.17.0
   get: ^3.22.2
   google_fonts: ^1.1.1
