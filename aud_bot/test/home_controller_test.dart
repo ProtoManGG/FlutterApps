@@ -1,4 +1,4 @@
-import 'package:aud_bot/logic/home_controller.dart';
+import 'package:aud_bot/modules/home/home_controller.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -12,7 +12,7 @@ void main() {
       homeController = HomeController();
       final list = homeController.radios;
       // act
-      await homeController.fetchRadios();
+      // await homeController.wfetchRadios();
       // assert
       expect(homeController.radios, list);
     },

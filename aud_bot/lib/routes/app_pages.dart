@@ -1,5 +1,5 @@
-import 'package:aud_bot/logic/home_binding.dart';
-import 'package:aud_bot/pages/home_page.dart';
+import 'package:aud_bot/modules/home/home_binding.dart';
+import 'package:aud_bot/modules/home/home_page.dart';
 import 'package:get/get.dart';
 part './app_routes.dart';
 

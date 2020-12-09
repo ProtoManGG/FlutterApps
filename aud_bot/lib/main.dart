@@ -16,11 +16,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'AudBot',
-      theme: ThemeData(
-        fontFamily: GoogleFonts.poppins().fontFamily,
-      ),
+      theme: ThemeData(fontFamily: GoogleFonts.poppins().fontFamily),
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.pages,
     );
-  }
+  } 
 }
