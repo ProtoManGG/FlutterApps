@@ -1,0 +1,24 @@
+name: attendance_keeper
+description: A new Flutter project.
+
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.0
+  get: 3.24.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  lint: ^1.5.1
+
+flutter:
+  uses-material-design: true
