@@ -1,0 +1,21 @@
+name: bitcoin_ticker
+description: A new Flutter application.
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.2.2 <3.0.0"
+
+dependencies:
+  cupertino_icons: ^0.1.2
+  dio: ^3.0.10
+  flutter:
+    sdk: flutter
+  get: 3.24.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  lint: ^1.5.1
+
+flutter:
+  uses-material-design: true
