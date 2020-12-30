@@ -3,12 +3,12 @@ class Failure {
   // throw Failure('No Internet connection 😑');
   // throw Failure("Couldn't find the post 😱");
   // throw Failure("Bad response format 👎");
-  final int statusCode;
+  final int? statusCode;
   final String message;
 
   Failure({
     this.statusCode,
-    this.message,
+    required this.message,
   });
 
   @override

@@ -1,4 +1,3 @@
-import 'package:bitcoin_ticker/app/services/services.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
