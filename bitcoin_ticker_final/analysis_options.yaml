@@ -3,3 +3,7 @@ include: package:lint/analysis_options.yaml
 linter:
   rules:
     import_of_legacy_library_into_null_safe: false
+
+analyzer:
+  errors:
+    import_of_legacy_library_into_null_safe: ignore
